@@ -1,0 +1,29 @@
+
+<div>
+  <div *ngIf="customer">
+    <div><b>ID:</b> {{customer.Id}}</div>
+    <div><b>Cliente:</b> {{customer.Name}} {{customer.LastName}}</div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col">Calle</th>
+        <th class="col">Número</th>
+        <th class="col">Sector</th>
+        <th class="col">Provincia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let address of customerAddresses">
+        <td>{{address.Calle}}</td>
+        <td>{{address.Numero}}</td>
+        <td>{{address.Sector}}</td>
+        <td>{{address.Provincia}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <span (click)="addCustomerAddress()">
+    <i class="fas fa-plus-circle fa-2x add-address-icon"></i>
+  </span>
+</div>

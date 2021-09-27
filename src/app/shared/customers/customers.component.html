@@ -1,0 +1,44 @@
+<div class="m-3">
+  <h3>Información de Clientes</h3>
+</div>
+<div class="container">
+  <div class="row d-flex justify-content-around">
+    <div class="mb-2 card col-xs-12 col-sm-12 col-md-12 col-lg-5">
+      <div class="card-body">
+        <h5 class="card-subtitle text-muted mb-2">Clientes</h5>
+        <table class="table table-responsive">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers">
+              <td>{{customer.Id}}</td>
+              <td>{{customer.Name}}</td>
+              <td>{{customer.LastName}}</td>
+              <td>
+                <span (click)="showCustomerDetails(customer.Id)">
+                  <i class="customer-info bi" ngbTooltip="{{currentCustomer?.Id !== customer?.Id ? 'Mostrar detalles' : 'Ocultar detalles'}}" placement="top"
+                     [ngClass]="currentCustomer?.Id !== customer?.Id ?
+                    'bi-info-circle-fill customer-info-icon' :
+                    'bi-dash-circle-fill customer-info-close-icon'"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="currentCustomer" class="mb-2 card col-xs-12 col-sm-12 col-md-12 col-lg-5">
+      <div class="card-body">
+        <h5 class="card-subtitle text-muted mb-2">Direcciones</h5>
+        <app-customer-details [customer]="currentCustomer"></app-customer-details>
+      </div>
+    </div>
+  </div>
+</div>
+

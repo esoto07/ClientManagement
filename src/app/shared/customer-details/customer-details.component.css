@@ -1,0 +1,11 @@
+.add-address-icon {
+  color: #8bbd8b;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.add-address-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

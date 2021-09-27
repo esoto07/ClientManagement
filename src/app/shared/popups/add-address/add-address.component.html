@@ -1,0 +1,27 @@
+<div class="w-100 m-2">
+  <h3>Nueva Dirección</h3>
+</div>
+
+<form [formGroup]='addressForm'>
+  <div class="container">
+    <div class="mb-3 col-sm-12 col-md-12 col-lg-12" *ngFor="let control of formConfig">
+      <label class="form-label">{{control.label}}</label>
+      <input type="{{control.type}}" class="form-control" formControlName="{{control.name}}">
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="addressForm.invalid && addressForm.dirty">
+      <div class="mb-2">Los siguientes campos deben ser completados:</div>
+      <ul>
+        <div *ngFor="let control of formConfig">
+          <li *ngIf="addressForm.get(control.name)?.invalid">{{control.label}}</li>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div class="m-2 d-flex justify-content-end">
+    <div class="d-flex justify-content-around w-50">
+      <button class="btn btn-success btn-sm" [disabled]="addressForm.invalid" (click)="addAddress()">Agregar</button>
+      <button class="btn btn-danger btn-sm" (click)="activeModal.close()">Cancelar</button>
+    </div>
+  </div>
+</form>
