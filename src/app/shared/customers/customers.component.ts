@@ -13,25 +13,23 @@ import { SetCurrentCustomer } from './store/customers.actions';
 export class CustomersComponent implements OnInit {
 
   customers: CustomerInfo[] = [];
-  currentCustomer?: CustomerInfo | any;
+  currentCustomer?: CustomerInfo;
 
   constructor(private store: Store<fromCustomer.CustomerState>) {}
 
   ngOnInit(): void {
     this.store.pipe(select(getCustomersState)).subscribe(data => {
       this.customers = data;
-    })
+    });
   }
 
-  showCustomerDetails(id: number) {
-    if (id === this.currentCustomer?.Id) {
+  showCustomerDetails(id: string) {
+    if (id === this.currentCustomer?._id) {
       this.store.dispatch(new SetCurrentCustomer(null));
-      this.currentCustomer = null;
+      this.currentCustomer = undefined;
     } else {
-      this.currentCustomer = this.customers.find(c => c.Id === id) as CustomerInfo;
+      this.currentCustomer = this.customers.find(c => c._id === id) as CustomerInfo;
       this.store.dispatch(new SetCurrentCustomer(this.currentCustomer));
     }
-    console.log(id);
-    console.log(this.currentCustomer?.Id);
   }
 }

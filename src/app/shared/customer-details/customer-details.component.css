@@ -5,7 +5,11 @@
   right: 20px;
 }
 
-.add-address-icon:hover {
+.add-address-icon:hover, td.delete-address-icon:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+td.delete-address-icon i{
+  font-size: 20px;
 }

@@ -5,6 +5,8 @@ import { Store, select } from '@ngrx/store';
 import * as fromCustomerDetails from './store/customer-details.reducer';
 import { getCustomerAddressesState } from './store';
 import { PopupService } from './../../core/services/popup.service';
+import { AddressService } from './../../core/services/address.service';
+import { RemoveCustomerAddress } from './store/customer-details.actions';
 
 @Component({
   selector: 'app-customer-details',
@@ -17,11 +19,13 @@ export class CustomerDetailsComponent implements OnInit, OnChanges {
   customerAddresses: CustomerAddress[] = [];
   addresses: CustomerAddress[] = [];
 
-  constructor(private store: Store<fromCustomerDetails.CustomerDetailsState>, private popupService: PopupService) { }
+  constructor(private store: Store<fromCustomerDetails.CustomerDetailsState>,
+              private popupService: PopupService,
+              private addressService: AddressService) { }
 
   ngOnInit(): void {
     this.store.pipe(select(getCustomerAddressesState)).subscribe(data => {
-      this.customerAddresses = data.filter(c => c.CustomerId === this.customer?.Id);
+      this.customerAddresses = data.filter(c => c.client === this.customer?._id);
       this.addresses = data;
     });
   }
@@ -31,7 +35,7 @@ export class CustomerDetailsComponent implements OnInit, OnChanges {
 
     if (customer.previousValue !== customer.currentValue) {
       if (customer.currentValue) {
-        this.customerAddresses = this.addresses.filter((c: CustomerAddress) => c.CustomerId === this.customer?.Id);
+        this.customerAddresses = this.addresses.filter((c: CustomerAddress) => c.client === this.customer?._id);
       }
     }
   }
@@ -40,4 +44,14 @@ export class CustomerDetailsComponent implements OnInit, OnChanges {
     this.popupService.getAddAddressPopup();
   }
 
+  removeAddress(id: string = '') {
+    if (id === '') return;
+
+    this.addressService.removeAddress(id).subscribe(
+      (data) => {
+        this.store.dispatch(new RemoveCustomerAddress(id));
+      },
+      (err) => console.error(err)
+    )
+  }
 }

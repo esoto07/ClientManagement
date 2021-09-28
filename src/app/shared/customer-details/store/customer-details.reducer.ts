@@ -11,24 +11,20 @@ const initialState: CustomerDetailsState = {
 
 export function CustomerDetailsReducer(state = initialState, action: customerDetailsActions.Actions): CustomerDetailsState {
   switch (action.type) {
-    case customerDetailsActions.SET_CUSTOMERS_ADDRESS:
+    case customerDetailsActions.SET_CUSTOMERS_ADDRESS: {
       return { ...state, addresses: action.payload };
-    case customerDetailsActions.ADD_CUSTOMER_ADDRESS:
+    }
+    case customerDetailsActions.ADD_CUSTOMER_ADDRESS: {
       const addresses = [...state.addresses];
-      const { customer, address: newAddress } = action.payload;
-      const addressId = Math.max(...addresses.map((a: CustomerAddress) => a.Id)) + 100;
-      const address: CustomerAddress = {
-        Id: addressId,
-        CustomerId: customer.Id,
-        Calle: newAddress.calle,
-        Numero: newAddress.numero,
-        Provincia: newAddress.provincia,
-        Sector: newAddress.sector
-      };
 
-      addresses.push(address);
+      addresses.push(action.payload);
 
       return { ...state, addresses };
+    }
+    case customerDetailsActions.REMOVE_CUSTOMER_ADDRESS: {
+        const addresses = state.addresses.filter(addr => addr._id !== action.payload);
+        return { ...state, addresses };
+      }
     default:
       return state;
   }

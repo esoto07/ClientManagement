@@ -1,8 +1,8 @@
 
 <div>
   <div *ngIf="customer">
-    <div><b>ID:</b> {{customer.Id}}</div>
-    <div><b>Cliente:</b> {{customer.Name}} {{customer.LastName}}</div>
+    <div><b>ID:</b> {{customer._id}}</div>
+    <div><b>Cliente:</b> {{customer.name}} {{customer.lastname}}</div>
   </div>
   <table class="table">
     <thead>
@@ -11,14 +11,16 @@
         <th class="col">Número</th>
         <th class="col">Sector</th>
         <th class="col">Provincia</th>
+        <th class="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let address of customerAddresses">
-        <td>{{address.Calle}}</td>
-        <td>{{address.Numero}}</td>
-        <td>{{address.Sector}}</td>
-        <td>{{address.Provincia}}</td>
+        <td>{{address.street}}</td>
+        <td>{{address.number}}</td>
+        <td>{{address.sector}}</td>
+        <td>{{address.province}}</td>
+        <td class="delete-address-icon"><i class="bi bi-trash-fill text-danger" (click)="removeAddress(address._id)"></i></td>
       </tr>
     </tbody>
   </table>

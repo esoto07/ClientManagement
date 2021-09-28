@@ -1,9 +1,9 @@
-<div class="w-100 m-2">
+<div class="w-100 m-4">
   <h3>Nueva Dirección</h3>
 </div>
 
 <form [formGroup]='addressForm'>
-  <div class="container">
+  <div class="container px-4">
     <div class="mb-3 col-sm-12 col-md-12 col-lg-12" *ngFor="let control of formConfig">
       <label class="form-label">{{control.label}}</label>
       <input type="{{control.type}}" class="form-control" formControlName="{{control.name}}">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="m-2 d-flex justify-content-end">
+  <div class="m-4 d-flex justify-content-end">
     <div class="d-flex justify-content-around w-50">
       <button class="btn btn-success btn-sm" [disabled]="addressForm.invalid" (click)="addAddress()">Agregar</button>
       <button class="btn btn-danger btn-sm" (click)="activeModal.close()">Cancelar</button>

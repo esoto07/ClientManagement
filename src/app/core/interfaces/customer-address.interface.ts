@@ -1,8 +1,8 @@
 export interface CustomerAddress {
-  Id: number;
-  CustomerId: number;
-  Calle: string;
-  Sector: string;
-  Provincia: string;
-  Numero: string;
+  _id?: string;
+  client: string;
+  street: string;
+  sector: string;
+  province: string;
+  number: string;
 }

@@ -17,13 +17,13 @@
           </thead>
           <tbody>
             <tr *ngFor="let customer of customers">
-              <td>{{customer.Id}}</td>
-              <td>{{customer.Name}}</td>
-              <td>{{customer.LastName}}</td>
+              <td>{{customer._id}}</td>
+              <td>{{customer.name}}</td>
+              <td>{{customer.lastname}}</td>
               <td>
-                <span (click)="showCustomerDetails(customer.Id)">
-                  <i class="customer-info bi" ngbTooltip="{{currentCustomer?.Id !== customer?.Id ? 'Mostrar detalles' : 'Ocultar detalles'}}" placement="top"
-                     [ngClass]="currentCustomer?.Id !== customer?.Id ?
+                <span (click)="showCustomerDetails(customer._id)">
+                  <i class="customer-info bi" ngbTooltip="{{currentCustomer?._id !== customer?._id ? 'Mostrar detalles' : 'Ocultar detalles'}}" placement="top"
+                     [ngClass]="currentCustomer?._id !== customer?._id ?
                     'bi-info-circle-fill customer-info-icon' :
                     'bi-dash-circle-fill customer-info-close-icon'"></i>
                 </span>
